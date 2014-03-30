@@ -1,0 +1,17 @@
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic);
+
+#spritz {
+  font-family: 'Lato', sans-serif;
+  font-size: 2em;
+  border: 1px solid tomato;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.red {
+  color: red;
+}

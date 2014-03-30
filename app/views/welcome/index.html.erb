@@ -1,0 +1,43 @@
+<div id="spritz">We<span class="red">l</span>come.</div>
+<br><br>
+<textarea id="userInput" cols="30" rows="10"></textarea>
+<button onclick='rsvpFunction()'>Go!</button>
+
+<script>
+
+  // Things to add:
+  // Set position at center of red marked char
+  // Add ability to set wpm (backwards calculate the interval)
+  // Add ability to load from PDF or ebook
+  // Add delay at each period so the sentences are broken up
+
+  var rsvpFunction = function() {
+    content = $('#userInput').val();
+    console.log(content);
+    var contentArray = content.split(" ").filter(function(n) { return n != "" });
+    // var contentArray = content.split(/\W/).filter(function(n) { return n != "" });
+    var counter = 0;
+    var interval = 250;
+
+    var startSpritz = setInterval(function() {
+      if (counter >= contentArray.length - 1) {
+        window.clearInterval(startSpritz);
+      };
+
+      var avgNumber = Math.round(contentArray[counter].length * 0.29);
+      var wordArray = contentArray[counter].split('');
+      wordArray.splice(avgNumber, 1, "<span class='red'>" + contentArray[counter][avgNumber] + "</span>")
+      wordArray = wordArray.join('');
+
+      $('#spritz').html(wordArray);
+      counter++;
+
+      // if (wordArray[wordArray.length - 1] = ".") {
+      //   interval = 1000;
+      // } else {
+      //   interval = 250;
+      // };
+      // console.log(interval);
+    }, interval);
+  };
+</script>
