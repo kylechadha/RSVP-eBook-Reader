@@ -1,7 +1,13 @@
+
 <div id="spritz">We<span class="red">l</span>come.</div>
 <br><br>
 <textarea id="userInput" cols="30" rows="10"></textarea>
-<button onclick='rsvpFunction()'>Go!</button>
+<button onclick='rsvpFunction()'>Go!</button><br>
+
+WPM: 
+<button id="200" class="test" onclick='wordsPerMinute()'>200</button>
+<button id="300" onclick='wordsPerMinute()'>300</button>
+<button id="400" onclick='wordsPerMinute()'>400</button>
 
 <script>
 
@@ -12,12 +18,23 @@
   // Add delay at each period so the sentences are broken up
   // Create it so spritz happens in the center of the page but you can see the text lines before and after it. That way you don't get as lost if you stop paying attention
   // Big pause / play buttons
+  // Add the ability to swipe up and down to load more lines up and down
+
+
+  // Not working -- need to look up jquery on how to check id
+  var wordsPerMinute = function() {
+    console.log($(this).hasClass("test"));
+    // if (this.id == )
+  }
 
   var rsvpFunction = function() {
     content = $('#userInput').val();
     console.log(content);
+
+    // Splits incoming content and removes extra spaces
     var contentArray = content.split(" ").filter(function(n) { return n != "" });
-    // var contentArray = content.split(/\W/).filter(function(n) { return n != "" });
+    console.log(contentArray);
+
     var counter = 0;
     var interval = 250;
 
@@ -26,10 +43,25 @@
         window.clearInterval(startSpritz);
       };
 
-      var avgNumber = Math.round(contentArray[counter].length * 0.29);
+      var avgNumber = Math.round((contentArray[counter].length - 1) * 0.29);
       var wordArray = contentArray[counter].split('');
       wordArray.splice(avgNumber, 1, "<span class='red'>" + contentArray[counter][avgNumber] + "</span>")
-      wordArray = wordArray.join('');
+      // console.log(wordArray);
+
+      var firstPortion = [], redLetter, lastPortion = [];
+      for (i = 0; i < wordArray.length; i++) {
+        if (i < avgNumber) {
+          firstPortion.push(wordArray[i]);
+        } else if (i == avgNumber) {
+          redLetter = wordArray[i];
+        } else {
+          lastPortion.push(wordArray[i]);
+        };
+      };
+      firstPortion = firstPortion.join('');
+      lastPortion = lastPortion.join('');
+      console.log(firstPortion + " " + redLetter + " " + lastPortion);
+      // wordArray = wordArray.join('');
 
       $('#spritz').html(wordArray);
       counter++;
