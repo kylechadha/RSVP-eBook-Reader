@@ -13,6 +13,25 @@
   margin-bottom: 31px;
 }
 
-.red {
+#left {
+  position: absolute;
+  left: 0%;
+  text-align: right;
+  width: 48%;
+  top: 6%;
+}
+
+#middle {
+  position: absolute;
+  left: 48%;
   color: red;
+  top: 6%;
+}
+
+#right {
+  position: absolute;
+  width: 50%;
+  text-align: left;
+  right: 0%;
+  top: 6%;
 }
